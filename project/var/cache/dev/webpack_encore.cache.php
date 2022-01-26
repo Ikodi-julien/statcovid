@@ -4,8 +4,23 @@
 
 return [[
 
+'_default' => 0,
 
 ], [
 
+0 => [
+    'entrypoints' => [
+        'app' => [
+            'js' => [
+                '/build/runtime.61b1725c.js',
+                '/build/758.a27670bf.js',
+                '/build/app.5ffa9bc6.js',
+            ],
+            'css' => [
+                '/build/app.fd977f01.css',
+            ],
+        ],
+    ],
+],
 
 ]];

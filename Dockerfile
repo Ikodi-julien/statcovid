@@ -35,3 +35,4 @@ WORKDIR /var/www/
 COPY ./project ./project
 
 COPY --from=builder /app/public/build ./project/public/build
+RUN chmod 0777 -R project/var/log project/var/cache

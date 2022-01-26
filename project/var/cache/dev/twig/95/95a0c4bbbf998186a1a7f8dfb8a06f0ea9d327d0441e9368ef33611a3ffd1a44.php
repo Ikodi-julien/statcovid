@@ -224,6 +224,6 @@ class __TwigTemplate_f620dda567563366c945254c0c66c34fb2d6d78515a328fdab4fdf80bb9
         {% block javascripts %}
         {% endblock %}
     </body>
-</html>", "base.html.twig", "/var/www/project/templates/base.html.twig");
+</html>", "base.html.twig", "/var/www/html/symfony/statcovid/project/templates/base.html.twig");
     }
 }
