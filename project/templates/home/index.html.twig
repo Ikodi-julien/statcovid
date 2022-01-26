@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %} Les chiffres du Covid en France {% endblock %}
+{% block body %}
+<h1>Statistiques COVID-19</h1>
+<section class="france">
+  <h2>Données pour la France le {{ franceData.date }}</h2>
+  
+  <p>Source : https://coronavirusapifr.herokuapp.com/data/live/france</p>
+  <p>Date : {{ franceData.date }}</p>
+  
+  <p>Nombre de patients actuellement hospitalisés pour COVID-19 : {{ franceData.hosp }}</p>
+  <p>Nombre de patients actuellement en réanimation ou en soins intensifs : {{ franceData.rea }}</p>
+  <p>Taux d'occupation des lits de réa par des patients Covid * : {{ franceData.TO | round(3, 'floor')  * 100 }} %</p>
+  <p>Cumul des décès : {{ franceData.dc_tot }}</p>
+  <p>Nombre cumulé de patients ayant été hospitalisés pour COVID-19 et de retour à domicile en raison de l'amélioration de leur état de santé : {{ franceData.rad }}</p>
+  <p>* tension hospitalière sur la capacité en réanimation (Proportion de patients atteints de COVID-19 actuellement en réanimation, en soins intensifs, ou en unité de surveillance continue rapportée au total des lits en capacité initiale, c’est-à-dire avant d’augmenter les capacités de lits de réanimation dans un hôpital)</p>
+</section>
+
+<section class="deps">
+  <h2>Données par département le {{ depsData[0].date}}</h2>
+  <div class="deps__cards">
+    {% for dep in depsData %}
+    <article class="card">
+      <h1>{{dep.dep}} - {{dep.lib_dep}}</h1>
+      <main>
+        <p>Hospitalisés : {{ dep.hosp }}</p>
+        <p>En réa : {{ dep.rea }}</p>
+        <p>Décès : {{ dep.dchosp }}</p>
+      </main>
+  
+      <footer>
+        <a href="#"> Détails </a>
+      </footer>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

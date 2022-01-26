@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  php:
+    build: .
+    image: ikodi/statcovid
+    container_name: covid_symfony
+    ports:
+      - 5656:80
+    volumes:
+      - ./vhosts:/etc/apache2/sites-enabled
+      - ./project:/var/www/project

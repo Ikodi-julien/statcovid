@@ -1,0 +1,62 @@
+:root {
+  --font-color-dark: rgba(40, 40, 40, 0.9);
+  --font-color-light: rgba(255, 255, 255, 0.8);
+  --shadow-color: rgba(40, 40, 40, 0.3);
+  --dark-blue: rgb(9, 48, 73);
+  --mid-blue: rgba(9, 48, 73, 0.7);
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  color: var(--font-color-dark);
+  color: var(--font-color-dark);
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background: linear-gradient(90deg, var(--dark-blue), var(--mid-blue));
+
+  &__links {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  &__link {
+    padding: 1rem;
+    & a {
+      color: var(--font-color-light);
+      text-decoration: none;
+    }
+  }
+}
+
+.container {
+  & > h1 {
+    text-align: center;
+  }
+}
+
+.france,
+.deps {
+  padding: 1rem;
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    & .card {
+      width: 180px;
+      padding: 1rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      box-shadow: 0 3px 5px 2px var(--shadow-color);
+    }
+  }
+}
