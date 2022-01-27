@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{name}}{% endblock %}
+
+{% block body %}
+<section class="dep">
+	<h1>{{name}}</h1>
+
+	<h3>Hospitalisés : </h3>
+	<p id="hospit"></p>
+	<h3>En réa : </h3>
+	<p id="rea"></p>
+	<h3>Décès : </h3>
+	<p id="dc"></p>
+	
+	<!-- Loader -->
+	<div class="lds-roller">
+		<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+	</div>
+	
+	<div class="chart --hide">
+		<div>
+  		<canvas id="myChart"></canvas>
+		</div>
+	</div>
+</section>
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script type="module" src="/js/chart.js"></script>
+{% endblock %}

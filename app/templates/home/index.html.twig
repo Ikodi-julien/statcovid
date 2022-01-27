@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %} Les chiffres du Covid en France {% endblock %}
+{% block body %}
+<h1>Statistiques COVID-19</h1>
+<section class="france">
+  <h2>Données pour la France le {{ franceData.date }}</h2>
+
+	{# <h3>Date : </h3>
+  <p>{{ franceData.date }}</p> #}
+  <h3>Patients hospitalisés :</h3>
+  <p>{{ franceData.hosp }}</p>
+	<h3>Patients en réa ou en soins intensifs : </h3>
+  <p>{{ franceData.rea }}</p>
+	<h3>Taux d'occupation des lits de réa * : </h3>
+  <p>{{ franceData.TO | round(3, 'floor')  * 100 }} %</p>
+	<h3>Cumul des décès : </h3>
+  <p>{{ franceData.dc_tot }}</p>
+	<h3>Patients ayant été hospitalisés et de retour à domicile en raison de l'amélioration de leur état de santé : </h3>
+  <p>{{ franceData.rad }}</p>
+	<h3>Source : </h3>
+  <p>https://coronavirusapifr.herokuapp.com/data/live/france</p>
+  <span><em>* tension hospitalière sur la capacité en réanimation (Proportion de patients atteints de COVID-19 actuellement en réanimation, en soins intensifs, ou en unité de surveillance continue rapportée au total des lits en capacité initiale, c’est-à-dire avant d’augmenter les capacités de lits de réanimation dans un hôpital)</em></span>
+</section>
+
+<section class="deps">
+  <h2>Données par département le {{ depsData[0].date}}</h2>
+  <div class="deps__cards">
+    {% for dep in depsData %}
+		<a href={{ path('app_department', {'dep': dep.lib_dep })}}>
+			<article class="card">
+				<h1>{{dep.dep}} - {{dep.lib_dep}}</h1>
+				<main>
+					<p>Hospitalisés : {{ dep.hosp }}</p>
+					<p>En réa : {{ dep.rea }}</p>
+					<p>Décès : {{ dep.dchosp }}</p>
+				</main>
+			</article>
+  	</a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
