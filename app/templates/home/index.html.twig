@@ -1,25 +1,69 @@
 {% extends 'base.html.twig' %}
 {% block title %} Les chiffres du Covid en France {% endblock %}
 {% block body %}
-<h1>Statistiques COVID-19</h1>
+<h1>Quelques stats COVID-19</h1>
 <section class="france">
-  <h2>Données pour la France le {{ franceData.date }}</h2>
+  <h2>Données pour la France le {{ franceData.date|split('-')|reverse|join('/')}}</h2>
 
 	{# <h3>Date : </h3>
   <p>{{ franceData.date }}</p> #}
-  <h3>Patients hospitalisés :</h3>
+  {# <h3>Patients hospitalisés :</h3>
   <p>{{ franceData.hosp }}</p>
 	<h3>Patients en réa ou en soins intensifs : </h3>
-  <p>{{ franceData.rea }}</p>
-	<h3>Taux d'occupation des lits de réa * : </h3>
-  <p>{{ franceData.TO | round(3, 'floor')  * 100 }} %</p>
+  <p>{{ franceData.rea }}</p> #}
+	
+<table>
+    <tbody>
+        <tr>
+            <td>Patients hospitalisés ce jour:</td>
+            <td>{{ franceData.hosp }}</td>
+        </tr>
+        <tr>
+            <td>Patients en réa ou soins intensifs ce jour:</td>
+            <td>{{ franceData.rea }}</td>
+        </tr>
+    </tbody>
+</table>
+	
+	<!-- Loader -->
+	<div class="lds-roller" id="reaLoader">
+		<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+	</div>
+	
+	<div class="chart --hide" id="reaChartContainer">
+  		<canvas id="reaChart"></canvas>
+	</div>
+	
+	{# <h3>Taux d'occupation des lits de réa * : </h3>
+  <p>{{ franceData.TO | round(3, 'floor')  * 100 }} %</p> #}
+	<table>
+			<tbody>
+					<tr>
+							<td>Taux d'occupation des lits de réa ce jour * :</td>
+							<td>{{ franceData.TO | round(3, 'floor')  * 100 }} %</td>
+					</tr>
+			</tbody>
+	</table>	
+
+  <p><em>* tension hospitalière sur la capacité en réanimation (Proportion de patients atteints de COVID-19 actuellement en réanimation, en soins intensifs, ou en unité de surveillance continue rapportée au total des lits en capacité initiale, c’est-à-dire avant d’augmenter les capacités de lits de réanimation dans un hôpital)</em></p>
+<!-- Loader -->
+	<div class="lds-roller" id="toLoader">
+		<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+	</div>
+	
+	<div class="chart --hide" id="reaTOContainer">
+  		<canvas id="toChart"></canvas>
+	</div>
+					
+
+	
 	<h3>Cumul des décès : </h3>
   <p>{{ franceData.dc_tot }}</p>
 	<h3>Patients ayant été hospitalisés et de retour à domicile en raison de l'amélioration de leur état de santé : </h3>
   <p>{{ franceData.rad }}</p>
 	<h3>Source : </h3>
   <p>https://coronavirusapifr.herokuapp.com/data/live/france</p>
-  <span><em>* tension hospitalière sur la capacité en réanimation (Proportion de patients atteints de COVID-19 actuellement en réanimation, en soins intensifs, ou en unité de surveillance continue rapportée au total des lits en capacité initiale, c’est-à-dire avant d’augmenter les capacités de lits de réanimation dans un hôpital)</em></span>
+
 </section>
 
 <section class="deps">
@@ -39,4 +83,10 @@
     {% endfor %}
   </div>
 </section>
+{% endblock %}
+{% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="/js/chartFranceHospit.js"></script>
+  {# <script type="module" src="/js/chartFranceTO.js"></script> #}
 {% endblock %}

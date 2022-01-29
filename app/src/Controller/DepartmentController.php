@@ -14,8 +14,13 @@ class DepartmentController extends AbstractController
     /**
      * @Route("/department/{dep}", name="app_department")
      */
-    public function index(string $dep): Response
+    public function index(string $dep, CallApiService $callApiService): Response
     {
-        return $this->render('department/index.html.twig', [ 'name' => $dep ]);
+        // dd($callApiService->getOneDepToday($dep));
+        
+        return $this->render('department/index.html.twig', [ 
+            'name' => $dep,
+            'data' => $callApiService->getOneDepToday($dep)[0]
+        ]);
     }
 }

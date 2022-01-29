@@ -6,20 +6,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const labels = [];
   const hospit = [];
   const rea = [];
-  const hospitSpan = document.getElementById("hospit");
-  const reaSpan = document.getElementById("rea");
-  const dcSpan = document.getElementById("dc");
   const loader = document.getElementsByClassName("lds-roller")[0];
   const chart = document.getElementsByClassName("chart")[0];
 
-  const depToday = await axios.get(`${API_URL}live/departement/${libDep}`);
-  console.log(depToday.data[0]);
-  hospitSpan.innerText = depToday.data[0].hosp;
-  reaSpan.innerText = depToday.data[0].rea;
-  dcSpan.innerText = depToday.data[0].dchosp;
+  const { data } = await axios.get(`${API_URL}departement/${libDep}`);
+  const depForChart = data.filter((data, index) => {
+    return index % 10 === 0;
+  });
 
-  const depAll = await axios.get(`${API_URL}departement/${libDep}`);
-  const depForChart = depAll.data.slice(-100);
+  // console.log(depForChart);
 
   depForChart.forEach((dep) => {
     labels.push(dep.date);
@@ -27,17 +22,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     rea.push(dep.rea);
   });
 
-  const data = {
+  const dataChart = {
     labels,
     datasets: [
       {
-        label: "Nouvelles Hospitalisations",
+        label: "Hospitalisés",
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgb(255, 99, 132)",
         data: hospit,
       },
       {
-        label: "Nouvelles entrées en Réa",
+        label: "En réa ou soins intensifs",
         borderColor: "rgb(46, 41, 78)",
         backgroundColor: "rgb(46, 41, 78)",
         data: rea,
@@ -47,12 +42,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const config = {
     type: "line",
-    data: data,
+    data: dataChart,
     options: {},
   };
 
   loader.classList.add("--hide");
   chart.classList.remove("--hide");
 
-  const myChart = new Chart(document.getElementById("myChart"), config);
+  new Chart(document.getElementById("myChart"), config);
 });

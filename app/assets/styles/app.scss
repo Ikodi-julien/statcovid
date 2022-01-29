@@ -1,6 +1,6 @@
 :root {
   --font-color-dark: rgba(40, 40, 40, 0.9);
-  --font-color-light: rgba(255, 255, 255, 0.8);
+  --font-color-light: rgba(240, 240, 240, 0.8);
   --shadow-color: rgba(40, 40, 40, 0.3);
   --dark-blue: rgb(9, 48, 73);
   --mid-blue: rgba(9, 48, 73, 0.7);
@@ -21,7 +21,11 @@ body {
 }
 
 .navbar {
-  background: linear-gradient(90deg, var(--dark-blue), var(--mid-blue));
+  background: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0) 80%,
+    var(--font-color-light) 100%
+  );
 
   &__links {
     display: flex;
@@ -31,9 +35,19 @@ body {
   &__link {
     padding: 1rem;
     & a {
-      color: var(--font-color-light);
+      color: var(--font-color-dark);
       text-decoration: none;
+      font-weight: bold;
     }
+  }
+}
+
+table {
+  margin-bottom: 1rem;
+  & tr,
+  td {
+    padding-right: 1rem;
+    padding-bottom: 1rem;
   }
 }
 
@@ -52,7 +66,7 @@ body {
 .dep {
   padding: 1rem;
   width: calc(100% - 2rem);
-  max-width: 750px;
+  max-width: 900px;
   margin: auto;
 
   @media screen and (max-width: 400px) {
@@ -103,6 +117,8 @@ body {
   box-shadow: 0 3px 5px 2px var(--shadow-color);
   padding: 0.5rem;
   display: block;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 
   &.--hide {
     display: none;

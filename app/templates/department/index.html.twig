@@ -4,14 +4,30 @@
 
 {% block body %}
 <section class="dep">
-	<h1>{{name}}</h1>
-
+	<h1>{{name}} le {{
+		data.date|split('-')|reverse|join('/')
+		}}</h1>
+{# 
 	<h3>Hospitalisés : </h3>
-	<p id="hospit"></p>
+	<p>{{data.hosp}}</p>
 	<h3>En réa : </h3>
-	<p id="rea"></p>
+	<p>{{data.rea}}</p>
 	<h3>Décès : </h3>
-	<p id="dc"></p>
+	<p>{{data.dchosp}}</p> #}
+	<table>
+		<tr>
+			<td>Hospitalisés ce jour:</td>
+			<td>{{data.hosp}}</td>
+		</tr>
+		<tr>
+			<td>En réa ce jour:</td>
+			<td>{{data.rea}}</td>
+		</tr>
+		<tr>
+			<td>Décès cumulés:</td>
+			<td>{{data.dchosp}}</td>
+		</tr>
+	</table>
 	
 	<!-- Loader -->
 	<div class="lds-roller">
@@ -26,7 +42,7 @@
 </section>
 {% endblock %}
 {% block javascripts %}
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script type="module" src="/js/chart.js"></script>
+	<script type="module" src="/js/chartDep.js"></script>
 {% endblock %}
